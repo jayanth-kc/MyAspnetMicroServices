@@ -8,7 +8,7 @@ using System;
 
 namespace Ordering.API.Extensions
 {
-    public class HostExtensions
+    public static class HostExtensions
     {
         public static IHost MigrateDatabase<TContext>(this IHost host, Action<TContext, IServiceProvider> seeder) where TContext : DbContext
         {
