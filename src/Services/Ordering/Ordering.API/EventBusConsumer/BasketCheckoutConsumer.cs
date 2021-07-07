@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using EventBus.Message.Events;
+using MassTransit;
 using MediatR;
 using Microsoft.Extensions.Logging;
 using System;
