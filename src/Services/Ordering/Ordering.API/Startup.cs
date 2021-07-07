@@ -48,6 +48,9 @@ namespace Ordering.API
             });
             services.AddMassTransitHostedService();
 
+            //General configuration
+            services.AddAutoMapper(typeof(Startup));
+
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
