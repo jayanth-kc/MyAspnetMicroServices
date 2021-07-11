@@ -120,13 +120,29 @@ services:
       - orderdb
       - rabbitmq
 
-
   ocelotapigw:
+    container_name: ocelotapigw
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=https://+:443;http://+:80
+    depends_on:
+      - catalog.api
+      - basket.api
+      - discount.api
+      - ordering.api
     ports:
-      - "80"
-      - "443"
-    volumes:
-      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+      - "8010:80"
+
+  shopping.aggregator:
+    container_name: shopping.aggregator
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "ApiSettings:CatalogUrl=http://catalog.api"
+      - "ApiSettings:BasketUrl=http://basket.api"
+      - "ApiSettings:OrderingUrl=http://ordering.api"
+    depends_on:
+      - catalog.api
+      - basket.api
+      - ordering.api
+    ports:
+      - "8005:80"
+
